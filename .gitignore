@@ -1,4 +1,5 @@
 target
 project/target
+src/main/resources
 *.class
 *.log
