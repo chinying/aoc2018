@@ -30,9 +30,25 @@ object Day1 {
 }
 
 object Day2 {
-  
+  val lines = Source.fromResource("d2.txt").getLines
+  var twice = 0
+  var thrice = 0
+  lines.foreach(line => {
+    var ut = new FrequencyTable[Char]()
+    val table = ut.freq(line.toList)
+    var two = false
+    var three = false
+    for ((k, v) <- table) {
+      if (v == 2) two = true
+      if (v == 3) three = true
+    }
+    if (two) twice += 1
+    if (three) thrice += 1
+  })
+  println(twice * thrice)
 }
 
 object Run extends App {
-  Day1
+  // Day1
+  Day2
 }
