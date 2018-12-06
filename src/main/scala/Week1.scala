@@ -1,7 +1,7 @@
 package aoc18
 
 import io.Source
-import scala.collection.mutable.HashSet
+import scala.collection.mutable.{HashSet, ListBuffer}
 
 object Day1 {
   val lines = Source.fromResource("d1-1.txt").getLines.toList
@@ -30,7 +30,7 @@ object Day1 {
 }
 
 object Day2 {
-  val lines = Source.fromResource("d2.txt").getLines
+  val lines = Source.fromResource("d2.txt").getLines.toList
   var twice = 0
   var thrice = 0
   lines.foreach(line => {
@@ -46,8 +46,34 @@ object Day2 {
     if (three) thrice += 1
   })
   println(twice * thrice)
-}
 
+
+  def differ(x: String, y: String): Int = {
+    var count = 0
+    // count += math.abs(x.length - y.length).toInt
+    // assumption that strings are of same length
+    for (i <- 0 until x.length) {
+      if (x(i) != y(i)) count += 1
+    }
+    count
+  }
+
+  lines.combinations(2).foreach(pair => {
+    val distance = differ(pair.head, pair.last)
+    if (distance == 1) {
+      val x = pair.head
+      val y = pair.last
+
+      // println(x.toSet.intersect(y.toSet).mkString)
+      var ans2 = new ListBuffer[Char]()
+      for (i <- 0 until x.length) {
+        if (x(i) == y(i)) ans2 += x(i)
+      }
+      println(ans2.mkString)
+    }
+  })
+
+}
 object Run extends App {
   // Day1
   Day2
